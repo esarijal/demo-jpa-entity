@@ -22,6 +22,11 @@ public class Carrot {
                 .with(TemporalAdjusters.lastDayOfYear());
     }
 
+    public Carrot(int id) {
+        super();
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

@@ -31,6 +31,14 @@ public class Employee {
         this.type = type;
     }
 
+    public Employee(int id, String name, LocalDate dob, EmployeeType type, Basket basket) {
+        this.id = id;
+        this.name = name;
+        this.dob = dob;
+        this.type = type;
+        this.basket = basket;
+    }
+
     public int getId() {
         return id;
     }
