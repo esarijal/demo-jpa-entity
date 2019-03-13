@@ -9,23 +9,13 @@ import java.time.LocalDate;
 public class Staff extends Employee {
 
     public Staff() {
-        super();
     }
 
-    public Staff(String name, LocalDate dob) {
-        this.name = name;
-        this.dob = dob;
-        this.type = EmployeeType.STAFF;
+    public Staff(int id, String name, LocalDate dob) {
+        super(id, name, dob);
     }
 
-    @Override
-    public String toString() {
-        return "Staff{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", dob=" + dob +
-                ", type=" + type +
-                ", basket=" + basket +
-                '}';
+    public Staff(int id, String name, LocalDate dob, Basket basket) {
+        super(id, name, dob, basket);
     }
 }

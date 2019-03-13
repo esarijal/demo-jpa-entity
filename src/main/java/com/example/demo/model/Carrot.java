@@ -8,7 +8,6 @@ import java.time.temporal.TemporalAdjusters;
 @Entity
 public class Carrot {
     @Id
-    @GeneratedValue
     private int id;
     private LocalDate expiryDate;
 
@@ -23,7 +22,7 @@ public class Carrot {
     }
 
     public Carrot(int id) {
-        super();
+        new Carrot();
         this.id = id;
     }
 

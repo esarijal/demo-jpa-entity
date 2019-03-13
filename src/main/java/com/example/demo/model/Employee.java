@@ -7,35 +7,28 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
 public class Employee {
-    public enum EmployeeType {STAFF, MANAGER, FARMER}
 
     @Id
-    @GeneratedValue
     protected int id;
     protected String name;
     protected LocalDate dob;
-    @Column(insertable = false, updatable = false)
-    protected EmployeeType type;
 
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     protected Basket basket;
 
     public Employee() {
-        type = EmployeeType.STAFF;
     }
 
-    public Employee(int id, String name, LocalDate dob, EmployeeType type) {
+    public Employee(int id, String name, LocalDate dob) {
         this.id = id;
         this.name = name;
         this.dob = dob;
-        this.type = type;
     }
 
-    public Employee(int id, String name, LocalDate dob, EmployeeType type, Basket basket) {
+    public Employee(int id, String name, LocalDate dob, Basket basket) {
         this.id = id;
         this.name = name;
         this.dob = dob;
-        this.type = type;
         this.basket = basket;
     }
 
@@ -63,19 +56,21 @@ public class Employee {
         this.dob = dob;
     }
 
-    public EmployeeType getType() {
-        return type;
-    }
-
-    public void setType(EmployeeType type) {
-        this.type = type;
-    }
-
     public Basket getBasket() {
         return basket;
     }
 
     public void setBasket(Basket basket) {
         this.basket = basket;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dob=" + dob +
+                ", basket=" + basket +
+                '}';
     }
 }

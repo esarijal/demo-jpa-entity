@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Basket;
 import com.example.demo.model.Employee;
 import com.example.demo.repository.BasketRepository;
-import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.repository.StaffRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,12 +14,13 @@ import java.util.stream.Collectors;
 public class EmployeeService {
 
     private final BasketRepository basketRepository;
-    private final EmployeeRepository employeeRepository;
+    private final StaffRepository staffRepository;
 
-    public EmployeeService(BasketRepository basketRepository, EmployeeRepository employeeRepository) {
+    public EmployeeService(BasketRepository basketRepository, StaffRepository staffRepository) {
         this.basketRepository = basketRepository;
-        this.employeeRepository = employeeRepository;
+        this.staffRepository = staffRepository;
     }
+
 
     @Transactional
     public void addBasketForAnEmployee(Basket basket, Employee employee){
@@ -34,7 +35,7 @@ public class EmployeeService {
     }
 
     public Map<Employee, Integer> findAllEmployeesCarrot(){
-        return employeeRepository.findAll().stream()
+        return staffRepository.findAll().stream()
                 .filter(e -> e.getBasket().getCarrots().size() > 0)
                 .collect(Collectors.toMap(e -> e,
                         e -> e.getBasket().getCarrots().size()));

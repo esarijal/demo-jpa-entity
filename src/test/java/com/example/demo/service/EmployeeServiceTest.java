@@ -3,13 +3,13 @@ package com.example.demo.service;
 import com.example.demo.model.Basket;
 import com.example.demo.model.Carrot;
 import com.example.demo.model.Employee;
+import com.example.demo.model.Staff;
 import com.example.demo.repository.EmployeeRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
@@ -49,12 +49,11 @@ public class EmployeeServiceTest {
                 ))
         );
 
-        Employee employeeA = new Employee(1, "Esa",
-                LocalDate.of(1987, 10, 22), Employee.EmployeeType.STAFF,
-                basketA);
+        Staff employeeA = new Staff(1, "Esa",
+                LocalDate.of(1987, 10, 22),basketA);
 
         Employee employeeB = new Employee(1, "Rijal",
-                LocalDate.of(1987, 10, 21), Employee.EmployeeType.STAFF,
+                LocalDate.of(1987, 10, 21),
                 basketB);
 
         employees = new ArrayList<>();

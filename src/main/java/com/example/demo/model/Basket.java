@@ -8,7 +8,6 @@ import java.util.Set;
 @Entity
 public class Basket {
     @Id
-    @GeneratedValue
     private int id;
 
     @OneToOne
@@ -20,6 +19,9 @@ public class Basket {
                             },
                 mappedBy = "basket")
     private Set<Carrot> carrots;
+
+    public Basket() {
+    }
 
     public Basket(int id) {
         this.id = id;

@@ -21,6 +21,13 @@ public class Freezer {
             mappedBy = "freezer")
     private Set<Carrot> carrots;
 
+    public Freezer() {
+    }
+
+    public Freezer(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

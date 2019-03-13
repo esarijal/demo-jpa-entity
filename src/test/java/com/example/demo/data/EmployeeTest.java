@@ -1,9 +1,11 @@
 package com.example.demo.data;
 
-import com.example.demo.model.Employee;
+import com.example.demo.model.Farmer;
+import com.example.demo.model.Manager;
 import com.example.demo.model.Staff;
-import com.example.demo.repository.EmployeeRepository;
-import org.junit.Before;
+import com.example.demo.repository.FarmerRepository;
+import com.example.demo.repository.ManagerRepository;
+import com.example.demo.repository.StaffRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,36 +13,42 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class EmployeeTest {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private StaffRepository staffRepository;
+    @Autowired
+    private FarmerRepository farmerRepository;
+    @Autowired
+    private ManagerRepository managerRepository;
 
     @Test
-    public void testSaveStaff_ok(){
-        Staff staff = new Staff("Esa Rijal", LocalDate.of(1985, 10, 21));
-        Staff saved = employeeRepository.save(staff);
+    public void testSaveEmployee_ok(){
+        Staff staff = new Staff(1, "Esa Rijal", LocalDate.of(1985, 10, 21));
+        staffRepository.save(staff);
 
-        Optional<Employee> optStaff = employeeRepository.findById(saved.getId());
-        assert optStaff.isPresent();
-        Staff result = (Staff) optStaff.get();
+        assertEquals(1, staffRepository.count());
+        staffRepository.findAll().forEach(System.out::println);
 
-        assertEquals(Employee.EmployeeType.STAFF, result.getType());
+        Farmer farmer = new Farmer(2, "Farmer 1", LocalDate.of(1985, 10, 21));
+        farmerRepository.save(farmer);
 
-        result.setType(Employee.EmployeeType.FARMER);
-        saved = employeeRepository.save(result);
-        optStaff = employeeRepository.findById(saved.getId());
-        assert optStaff.isPresent();
-        result = (Staff) optStaff.get();
+        assertEquals(1, farmerRepository.count());
+        farmerRepository.findAll().forEach(System.out::println);
 
-        assertNotEquals(Employee.EmployeeType.STAFF, result.getType());
-        assertEquals(Employee.EmployeeType.FARMER, result.getType());
+        Manager manager = new Manager(3, "Manager 1", LocalDate.of(1985, 10, 21));
+        managerRepository.save(manager);
+        manager = new Manager(4, "Manager 2", LocalDate.of(1985, 10, 21));
+        managerRepository.save(manager);
+
+        assertEquals(2, managerRepository.count());
+        managerRepository.findAll().forEach(System.out::println);
+
+
     }
 }
